@@ -1,73 +1,30 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import About from "./About";
+import Contact from "./Contact";
+import Projects from "./Projects";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import Layout from "./components/Layout";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Footer from "./components/Footer";
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "Jake Haberle",
-      headerLinks: [
-        {
-          title: "Home",
-          path: "/",
-          title: "About",
-          path: "/about",
-          title: "Contact",
-          path: "/contact",
-        },
-      ],
-      home: {
-        title: "Be Relentless",
-        subTitle: "I code things",
-        text: "Take a look at some of my projects below",
-      },
-      about: {
-        title: "About Me",
-      },
-      contact: {
-        title: "Chat With Me",
-      },
-    };
-  }
-
-  render() {
-    return (
-      <Router>
-        <Container className="p=0" fluid={true}>
-          <Navbar className="border-bottom" bg="transparent" expand="lg">
-            <Navbar.Brand>Jake Haberle</Navbar.Brand>
-            <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
-            <Navbar.Collapse id="navbar-toggle">
-              <Nav className="ml-auto">
-                <Link className="nav-link" to="/">
-                  Home
-                </Link>
-                <Link className="nav-link" to="/about">
-                  About
-                </Link>
-                <Link className="nav-link" to="/contact">
-                  Contact
-                </Link>
-                <Link className="nav-link" to="/contact">
-                  Github
-                </Link>
-                <Link className="nav-link" to="/contact">
-                  Resume
-                </Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-          <Footer />
-        </Container>
-      </Router>
-    );
-  }
+function App() {
+  return (
+    <React.Fragment>
+      <Navbar />
+      <Layout>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={About} />
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/contact" component={Contact} />
+          </Switch>
+        </Router>
+      </Layout>
+      <Footer />
+    </React.Fragment>
+  );
 }
 
 export default App;
